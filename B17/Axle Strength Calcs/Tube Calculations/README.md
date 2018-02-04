@@ -1,0 +1,1 @@
+Most of this is StaticsCalc, by Eric Noordam. I wrote ValmikTestCommandLine, which allows me to iterate through dozens of different tube geometries and measure the factor of safety to torsion and torsional buckling. I can also do fun things like play with the wound pattern and other material properties. I also used this script for B18.

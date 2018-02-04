@@ -1,0 +1,8 @@
+All units in in,lb, and ksi.
+Density=0.284
+Ultimate=269
+Yield=225
+E=28400
+Poisson=0.30
+ShearModulus=10900
+Reference: http://www.matweb.com/search/DataSheet.aspx?MatGUID=b5fe87c8cdde4431b62ad990d4f2042c

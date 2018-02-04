@@ -1,0 +1,8 @@
+All units in in,lb, and ksi.
+Density=0.284
+Ultimate=329
+Yield=268
+E=29700
+Poisson=0.29
+ShearModulus=14426
+Reference: RCV data sheet 

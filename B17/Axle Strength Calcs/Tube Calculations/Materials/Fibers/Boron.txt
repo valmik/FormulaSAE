@@ -1,0 +1,9 @@
+All units in MPA,kg,m. Except FAW, which is in g/m^2 This is fiber is based off of a T650 fiber and Dragonplate's data. FAW, E2, Poisson23 NOT REALLY FILLED IN
+E1=400000
+E2=300000
+Poisson12=.2
+Poisson23=0.5
+Density=2570
+Ultimate=3160
+FAW=0.150
+Reference: KollarandSpring

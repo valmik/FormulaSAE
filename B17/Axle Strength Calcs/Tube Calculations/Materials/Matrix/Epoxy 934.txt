@@ -1,0 +1,6 @@
+All units in MPa,kg/m^3.
+E=4100
+Poisson=0.35
+Density=1300
+Ultimate=83
+Reference: Kollar and Springer - Mechanical of Composite Structures

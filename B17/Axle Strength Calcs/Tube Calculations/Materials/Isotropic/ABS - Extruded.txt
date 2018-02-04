@@ -1,0 +1,8 @@
+All units in in,lb, and ksi. COuldn't find poisson
+Density=0.0434
+Ultimate=3.340
+Yield=1.89
+E=145
+Poisson=0
+ShearModulus=11300
+Reference: http://www.matweb.com/search/DataSheet.aspx?MatGUID=3a8afcddac864d4b8f58d40570d2e5aa

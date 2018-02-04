@@ -1,0 +1,132 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="2516201959" file="H:\Dropbox\Eric+Tej\177 Project\Code\StaticsCalc.prj" location="H:\Dropbox\Eric+Tej\177 Project\Code" name="StaticsCalc" target="target.mlapps" target-name="Package App">
+    <param.appname>StaticsCalc</param.appname>
+    <param.authnamewatermark>Eric Noordam, Tej Modi</param.authnamewatermark>
+    <param.email>eric.noordam@berkeley.edu</param.email>
+    <param.company>Berkeley Formula Racing</param.company>
+    <param.icon>${PROJECT_ROOT}\StaticsCalc_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\StaticsCalc_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\StaticsCalc_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\StaticsCalc_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>StaticsCalc is a program that allows for the calculation and comparison of the weight and factor of safety of simple parts to loads.</param.summary>
+    <param.description />
+    <param.screenshot>${PROJECT_ROOT}\Images\CalculateScreenShot.PNG</param.screenshot>
+    <param.version>1.0.4</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.6</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}\StaticsCalc.mlappinstall</param.output>
+    <param.guid>949f8bfb-8886-49a8-9dbe-295c550901b5</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.description />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\@StaticsCalc\StaticsCalc.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\@StaticsCalc\private\GraphGUI.m</file>
+      <file>${PROJECT_ROOT}\@StaticsCalc\private\LoadGUI.m</file>
+      <file>${PROJECT_ROOT}\@StaticsCalc\private\MaterialGUI.m</file>
+      <file>${PROJECT_ROOT}\@StaticsCalc\private\ResultsGUI.m</file>
+      <file>${PROJECT_ROOT}\CalculateMath.m</file>
+      <file>${PROJECT_ROOT}\Circle.m</file>
+      <file>${PROJECT_ROOT}\Composite.m</file>
+      <file>${PROJECT_ROOT}\Fiber.m</file>
+      <file>${PROJECT_ROOT}\Images\CalculateScreenShot.PNG</file>
+      <file>${PROJECT_ROOT}\Images\Icon.png</file>
+      <file>${PROJECT_ROOT}\Images\nValues.png</file>
+      <file>${PROJECT_ROOT}\Isotropic.m</file>
+      <file>${PROJECT_ROOT}\Loads.m</file>
+      <file>${PROJECT_ROOT}\Material.m</file>
+      <file>${PROJECT_ROOT}\Materials\Fibers\Aramid - Kevlar 29.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Fibers\Boron.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Fibers\DragonPlate.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Fibers\Glass - E-Glass.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Fibers\Graphite - T300.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\ABS - Extruded.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Aluminum 2024-T6.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Aluminum 6061-T6.jpg</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Aluminum 6061-T6.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Aluminum 7075-T6.jpg</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Aluminum 7075-T6.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel - 300M.jpg</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel - 300M.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 1018.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 4130 Normalized.jpg</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 4130 Normalized.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 4340 Hardened.jpg</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 4340 Hardened.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Isotropic\Steel 4340 Normalized.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Layups\-45 45 0 45 -45.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Layups\0 15 45 45 0 45 45 15 0.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Layups\0 90 0 90 0.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Layups\Rockwest Filament Wound.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Matrix\Epoxy 3501.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Matrix\Epoxy 5208.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Matrix\Epoxy 934.txt</file>
+      <file>${PROJECT_ROOT}\Materials\Matrix\Epoxy Epon.txt</file>
+      <file>${PROJECT_ROOT}\Matrix.m</file>
+      <file>${PROJECT_ROOT}\Rectangle.m</file>
+      <file>${PROJECT_ROOT}\References\E177StaticsCalc.pdf</file>
+      <file>${PROJECT_ROOT}\References\Shokrieh, M., Hasani A., Lessard, L., - Shear Buckling of a Composite Drive Shaft.pdf</file>
+      <file>${PROJECT_ROOT}\References\Silber, Joe - Carbon Axle Analysis Example.pdf</file>
+      <file>${PROJECT_ROOT}\Results.m</file>
+      <file>${PROJECT_ROOT}\Tube.m</file>
+    </fileset.depfun>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\Images</file>
+      <file>${PROJECT_ROOT}\Materials</file>
+      <file>${PROJECT_ROOT}\Results\B14 Axle.mat</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="H:\Dropbox\Eric+Tej\177 Project\Code" name="StaticsCalc.mlappinstall" optional="false">H:\Dropbox\Eric+Tej\177 Project\Code\StaticsCalc.mlappinstall</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2014b</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

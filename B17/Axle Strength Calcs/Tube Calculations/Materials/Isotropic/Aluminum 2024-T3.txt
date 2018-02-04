@@ -1,0 +1,8 @@
+All units in in,lb, and ksi.
+Density=0.100
+Ultimate=70
+Yield=50
+E=10600
+Poisson=0.33
+ShearModulus=4060
+Reference: http://www.onlinemetals.com/productguides/aluminumguide.cfm
