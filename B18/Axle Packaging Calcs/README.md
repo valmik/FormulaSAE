@@ -1,0 +1,1 @@
+These are the angle calcs that I used for B17. I rewrote the code because the old codebase was difficult to adapt to inverted axles. 
