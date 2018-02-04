@@ -1,0 +1,202 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{fancyhdr} % for headers and footers
+\usepackage{euler} % font
+\usepackage[nobreak=false]{mdframed}
+\usepackage{bm} % bold math for vectors
+\usepackage[dvipsnames]{xcolor}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{hyperref} % Links
+
+\newenvironment{greytext}{\color{Gray}}{\ignorespacesafterend}
+
+\newcommand{\volume}{\mathop{\ooalign{\hfil$V$\hfil\cr\kern0.08em--\hfil\cr}}\nolimits} % Fluid dynamics volume
+
+\hypersetup{
+        colorlinks=true,
+        linkcolor=blue,
+        filecolor=magenta,      
+        urlcolor=cyan,
+}
+
+\title{Axle Damping Calculation}
+
+\author{Valmik Prabhu}
+
+\graphicspath{ {Images/} }
+
+\begin{document}
+
+\maketitle
+
+\parindent = 0pt
+
+\subsection{Laplacian}
+
+We start with the differential equation:
+\begin{equation*}
+    u(t) = m\ddot{x} + c\dot{x} + kx
+\end{equation*}
+
+We then take the Laplacian by breaking it down:
+\begin{equation*}
+    \mathcal{L}\{m\ddot{x} + c\dot{x} + kx\} = \mathcal{L}\{m\ddot{x}\} + \mathcal{L}\{c \dot{x}\} + \mathcal{L}\{kx\} = \mathcal{L}\{u\}
+\end{equation*}
+
+We have
+\begin{gather*}
+    \mathcal{L}\{m\ddot{x}\} = m(s^2 X(s) - sx(0) - \dot{x}(0)) \\
+    \mathcal{L}\{c \dot{x}\} = c(sX(s) + x(0)) \\
+    \mathcal{L}\{kx\} = kX(s) \\
+    \mathcal{L}\{u\} = U(s)
+\end{gather*}
+
+Combining yields:
+\begin{equation*}
+    U(s) = m(s^2 X(s) - sx(0) - \dot{x}(0)) + c(sX(s) + x(0)) + kX(s)
+\end{equation*}
+
+To solve for $X$ it's easiest if we have $U$, which we know is a step response of unknown magnitude, and therefore is
+
+\begin{equation*}
+    U(s) = \mu \frac{1}{s}
+\end{equation*}
+
+where $\mu$ is the magnitude. Solving the equation yields: 
+
+\begin{equation*}
+    X(s) = \frac{\mu + ms\dot{x}(0) + (ms^2 + ks)x(0)}{ms^3 + cs^2 + ks}
+\end{equation*}
+
+
+\subsection{Inverse Laplacian}
+Now we use the inverse laplacian to solve for the step response in the time domain. First we break it up:
+
+\begin{align*}
+    X(s) = & \\
+    & \frac{\mu}{ms^3 + cs^2 + ks} \\
+    & \frac{ms \dot{x}(0)}{ms^3 + cs^2 + ks} = \frac{m \dot{x}(0)}{ms^2 + cs + k} \\
+    & \frac{(ms^2 + ks)x(0)}{ms^3 + cs^2 + ks} = \frac{(ms + k)x(0)}{ms^2 + cs + k}
+\end{align*}
+
+
+\subsubsection{First Part}
+For the first part, it most-closely resembles this transform:
+\begin{equation*}
+    K\frac{a^2 + b^2}{s[(s+a^2) + b^2]} = K - Ke^{-at}(\cos(bt) + \frac{a}{b}\sin(bt))
+\end{equation*}
+
+Setting
+\begin{equation*}
+    K\frac{a^2 + b^2}{s[(s+a)^2 + b^2]} = \frac{\mu}{s[ms^2 + cs + k]}
+\end{equation*}
+
+We find that 
+\begin{gather*}
+    a = \frac{c}{2m} \\
+    a^2 + b^2 = \frac{k}{m} \\
+    b = \sqrt{\frac{k}{m} - \frac{c^2}{4m^2}} \\
+    K = \frac{\mu}{k}
+\end{gather*}
+
+Solving back yields:
+
+\begin{equation*}
+    K\frac{a^2 + b^2}{s[(s+a)^2 + b^2]} = \frac{\frac{\mu}{k} \frac{k}{m}}{s[s^2 + \frac{c}{m}s + \frac{c^2}{4m^2} + \frac{k}{m} - \frac{c^2}{4m^2}]} = \frac{\frac{\mu}{m}}{s[s^2 + \frac{c}{m}s + \frac{k}{m}]} = \frac{\mu}{s[ms^2 + cs + k]}
+\end{equation*}
+
+So in the time domain, it's 
+\begin{equation*}
+    \frac{\mu}{k} - \frac{\mu}{k}e^{-\frac{c}{2m}t}(\cos(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t) + \frac{\frac{c}{2m}}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}}\sin(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t))
+\end{equation*}
+
+\subsubsection{Second Part}
+The second resembles
+\begin{equation*}
+    K\frac{b}{(s+a)^2 + b^2} = Ke^{-at}\sin(bt)
+\end{equation*}
+
+Setting
+\begin{equation*}
+    K\frac{b}{(s+a)^2 + b^2} = \frac{m \dot{x}(0)}{ms^2 + cs + k}
+\end{equation*}
+
+We find that
+\begin{gather*}
+    a = \frac{c}{2m} \\
+    a^2 + b^2 = \frac{k}{m} \\
+    b = \sqrt{\frac{k}{m} - \frac{c^2}{4m^2}} \\
+    K = \frac{\dot{x}(0)}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}}
+\end{gather*}
+
+Solving back yields:
+\begin{equation*}
+    K\frac{b}{(s+a)^2 + b^2} = \frac{\frac{\dot{x}(0)}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}} \sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}}{s^2 + \frac{c}{m} + \frac{c^2}{4m^2} + \frac{k}{m} - \frac{c^2}{4m^2}} = \frac{\dot{x}(0)}{s^2 + \frac{c}{m}s + \frac{k}{m}} = \frac{m\dot{x}(0)}{ms^2 + cs + k}
+\end{equation*}
+
+So in the time domain, it's
+\begin{equation*}
+    \frac{\dot{x}(0)}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}} e^{-\frac{c}{2m}t}\sin(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t)
+\end{equation*}
+
+
+\subsubsection{Third Part}
+The third resembles:
+\begin{equation*}
+    K\frac{s + a}{(s+a)^2 + b^2} = Ke^-{at}cos(bt)
+\end{equation*}
+
+Setting
+\begin{equation*}
+    K\frac{s + a}{(s+a)^2 + b^2} = \frac{(ms + k)x(0)}{ms^2 + cs + k}
+\end{equation*}
+
+We find that
+\begin{gather*}
+    a = \frac{c}{2m} \\
+    a^2 + b^2 = \frac{k}{m} \\
+    b = \sqrt{\frac{k}{m} - \frac{c^2}{4m^2}} \\
+    K = ????
+\end{gather*}
+
+Just realized, we don't actually need to know the forms of the constants, we just need to know that they exist.
+
+\subsection{Putting it together}
+
+Solving for the first two terms gives us this equation
+
+We have this equation:
+\begin{equation*}
+    \frac{\mu}{k} - \frac{\mu}{k}e^{-\frac{c}{2m}t}(\cos(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t) + \frac{\frac{c}{2m}}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}}\sin(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t)) + \frac{\dot{x}(0)}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}} e^{-\frac{c}{2m}t}\sin(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}t)
+\end{equation*}
+
+But this is hard to fit to, so we'll use:
+\begin{equation*}
+    K_1 - K_1e^{-at}(\cos(bt) + \frac{a}{b}\sin(bt)) + K_2e^{-at}\sin(bt)
+\end{equation*}
+
+With
+\begin{gather*}
+    a = \frac{c}{2m} \\
+    a^2 + b^2 = \frac{k}{m} \\
+    b = \sqrt{\frac{k}{m} - \frac{c^2}{4m^2}} \\
+    K_1 = \frac{\mu}{k} \\
+    K_2 = \frac{\dot{x}(0)}{\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}}}
+\end{gather*}
+
+Fitting in Matlab doesn't do well enough, so we use:
+
+\begin{equation*}
+    K_1 - K_1e^{-at}(\cos(bt) + \frac{a}{b}\sin(bt)) + K_2e^{-at}\sin(bt) + K_3 e^{-at}\cos(bt)
+\end{equation*}
+
+
+
+
+
+\end{document}
