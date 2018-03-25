@@ -29,3 +29,25 @@ for i = 1:length(files)
     final{2, i} = plot1;
     final{3, i} = plot2;
 end
+
+
+%% Design report
+
+files = {'FirstTest/SF3', 'FirstTest/CF3'};
+arbitraries = [180, 175];
+offsets = [2, 2];
+
+% files = {'ST3', 'ST2', 'ST1', 'SF5', 'SF3', 'SF2', 'SF1', 'CF3', 'CF2', 'CF1'};
+% arbitraries = [875, 100, 100, 950, 180, 325, 400, 175, 170, 180];
+% offsets = [2, 4, 2, 4, 2, 4, 1, 2, 2, 2];
+
+final = cell(3, length(files));
+for i = 1:length(files)
+    [c, m, k, R2, M_p, plot1, plot2] = DampingAnalysis_func(arbitraries(i), offsets(i), files{i});
+    xi = abs(c) / (2*sqrt(abs(m)*abs(k)));
+    final{1, i} = [c, m, k, R2];
+    final{2, i} = plot1;
+    final{3, i} = plot2;
+    files{i}
+    [c, m, k, xi, M_p, R2]
+end

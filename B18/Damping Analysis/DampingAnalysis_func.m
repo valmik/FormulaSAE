@@ -85,6 +85,8 @@ title([name ', idealized step response'])
 xi = abs(c) / (2*sqrt(abs(m)*abs(k)));
 M_p = exp(-pi * xi / sqrt(1 - xi^2));
 
-
+t = time(z);
+v = voltage(z);
+save([name(11:end), 'PlotData.mat'], 'fit', 'coeffs', 'step', 't', 'v', 'c', 'm', 'k')
 
 end
