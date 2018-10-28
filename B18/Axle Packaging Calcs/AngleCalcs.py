@@ -134,7 +134,7 @@ def definebasis(vec1, vec2):
 
 class Configuration:
     """docstring for Configuration"""
-    def __init__(self, splineL, cupL, theta, bump, plunge, length, staticCamber):
+    def __init__(self, splineL_i, splineL_o, cupL, theta, bump, plunge, length, staticCamber):
         self.ID = 0.7175*2
         self.OD = 2.9 # 3.25 worst case
         self.Length = length
@@ -153,17 +153,17 @@ class Configuration:
         self.staticCamber = staticCamber
         # self.UprightLocation = np.array([60, 20.78 + plunge, 8.69 + bump])
         self.UprightNormal = np.array([0, -1*math.cos(staticCamber*math.pi/180), math.sin(staticCamber*math.pi/180)])
-        self.OutboardTripod = self.UprightLocation - np.array([0, splineL, 0])
+        self.OutboardTripod = self.UprightLocation - np.array([0, splineL_o, 0])
         self.OutboardSplineDiameter = 0.4*2 # 0.435*2
-        self.OutboardSplineExtension = 0.6325
+        self.OutboardSplineExtension = 0.6325 + 0.06
 
 
         self.theta = theta
         self.DiffLocation = np.array([61.814 + 0.25*math.cos(theta), 3.88, 8.46 + 0.25*math.sin(theta) - 0.5]) # y was previously 3.79, but the other side was worse
         self.DiffNormal = np.array([0, 1, 0])
-        self.InboardTripod = self.DiffLocation + np.array([0, splineL, 0])
+        self.InboardTripod = self.DiffLocation + np.array([0, splineL_i, 0])
         self.InboardSplineDiameter = 0.4*2 # 0.435*2
-        self.InboardSplineExtension = 0.6325
+        self.InboardSplineExtension = 0.6325 + 0.06
 
         if bump >= 1: # Bump
             self.PushStart = np.array([57.150, 11.441, 18.593])
@@ -239,7 +239,7 @@ def calculateConfig(Config):
     uprightbasisT = np.linalg.inv(uprightbasis)
 
     # Now define the angle between the axle and the upright
-    uprightangle = math.acos(dsdunitify(axlevec).dot(unitify(Config.UprightNormal)))
+    uprightangle = math.acos(unitify(axlevec).dot(unitify(Config.UprightNormal)))
 
     # This allows us to define the additional offset from angling the axle
     uprightAngleOffset = Config.SpiderRadius*math.cos(30*math.pi/180)*math.sin(uprightangle)
@@ -444,17 +444,18 @@ if __name__ == '__main__':
     D7 = []
     D8 = []
 
-    for s in range(20, 20+1):
-        spline = s*0.1
-        trange = 360
-        for c in range(145, 155+1):
+    for s in range(170, 200+1):
+        spline_i = s*0.01
+        spline_o = 2.04
+        trange = 36
+        for c in range(163, 163+1):
             cup = c * 0.01
-            for l in range(1450, 1461+1):
+            for l in range(1481, 1481+1):
                 length = l * 0.01
                 flag = 0
-                for c in range(-30, 10+1):
+                for cam in range(-30, 10+1):
                 # for c in range(0, 0+1):
-                    camber = c*0.1
+                    camber = cam*0.1
                     D1 = []
                     D2 = []
                     D3 = []
@@ -468,9 +469,9 @@ if __name__ == '__main__':
 
                         # raw_input("Spline: " +str(spline) + " Angle: " + str(theta))
 
-                        Bump = Configuration(spline, cup, theta, 1, -0.08, length, camber-0.25)
-                        Ride = Configuration(spline, cup, theta, 0, 0, length, camber)
-                        Droop = Configuration(spline, cup, theta, -1, 0.049, length, camber+0.25)
+                        Bump = Configuration(spline_i, spline_o, cup, theta, 1, -0.08, length, camber-0.25)
+                        Ride = Configuration(spline_i, spline_o, cup, theta, 0, 0, length, camber)
+                        Droop = Configuration(spline_i, spline_o, cup, theta, -1, 0.049, length, camber+0.25)
                         # print Droop.InboardTripod, Droop.OutboardTripod
                         BumpR = calculateConfig(Bump)
                         RideR = calculateConfig(Ride)
@@ -494,9 +495,9 @@ if __name__ == '__main__':
                         d7 = min(BumpR.PushrodDist, RideR.PushrodDist, DroopR.PushrodDist)
                         d8 = min(BumpR.UndertrayDist, RideR.UndertrayDist, DroopR.UndertrayDist)
 
-                        if (d1 < 0.125 or d2 < 0.0625 or d3 < 0.125 or d4 < 0.0625 or d5 < 0.0625 or d6 < 0.0625 or d7 < 0.5 or d8 < 0.5):
+                        if (d1 < 0.125 or d2 < 0.0625 or d3 < 0.125 or d4 < 0.0625 or d5 < -0.0625 or d6 < -0.0625 or d7 < 0.5 or d8 < 0.5):
                             flag = 1
-                            print d1, d2, d3, d4, d5, d6, d7, d8
+                            # print d1, d2, d3, d4, d5, d6, d7, d8
                             break
 
                         D1.append(d1)
@@ -513,11 +514,13 @@ if __name__ == '__main__':
 
 
                     if flag == 1:
+                        print "bad"
                         break
 
                 if flag == 0:
-                    goodS.append((spline, cup, length, min(D1), min(D2), min(D3), min(D4), min(D5), min(D6), min(D7), min(D8)))
+                    goodS.append((spline_i, spline_o, cup, length, min(D1), min(D2), min(D3), min(D4), min(D5), min(D6), min(D7), min(D8)))
                     # print (spline, length)
+                    print "good"
 
     for axle in goodS:
         print axle
@@ -533,6 +536,5 @@ if __name__ == '__main__':
 # Static Toe
 # Eccentric Diff ~
 # Nonstraight upright +
-
 
 
